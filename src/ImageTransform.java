@@ -6,22 +6,36 @@ import edu.macalester.graphics.Image;
 public class ImageTransform {
 
     public static Image lighten(Image srcImage) {
-        // TODO: Task 1
+        float[] pixels = srcImage.toFloatArray(Image.PixelFormat.valueOf("RGB"));
+        for (int i=0; i< pixels.length; i++){
+            pixels[i] *= 1.5;
+        }
 
-        throw new UnsupportedOperationException("Method not yet defined");
+        Image transImg = new Image(srcImage.getImageWidth(), srcImage.getImageHeight(), pixels, Image.PixelFormat.valueOf("RGB"));
+        return transImg;
     }
 
 
     public static Image greenShift(Image srcImage) {
-        // TODO: Task 2
+        float[] pixels = srcImage.toFloatArray(Image.PixelFormat.valueOf("RGB"));
+        for (int i=1; i< pixels.length; i+=3){
+            pixels[i] += .25;
+            
+        }
 
-        throw new UnsupportedOperationException("Method not yet defined");
-    }
+        Image transImg = new Image(srcImage.getImageWidth(), srcImage.getImageHeight(), pixels, Image.PixelFormat.valueOf("RGB"));
+        return transImg;
+        }
 
     public static Image invert(Image srcImage) {
-        // TODO: Task 3
+        byte[] pixels = srcImage.toByteArray(Image.PixelFormat.valueOf("RGB"));
+        for (int i=0; i< pixels.length; i++){
+            pixels[i]^=255;
+            
+        }
 
-        throw new UnsupportedOperationException("Method not yet defined");
+        Image transImg = new Image(srcImage.getImageWidth(), srcImage.getImageHeight(), pixels, Image.PixelFormat.valueOf("RGB"));
+        return transImg;
     }
 
     public static void main(String[] args) {
@@ -46,6 +60,8 @@ public class ImageTransform {
         CanvasWindow canvas = new CanvasWindow("img", 500, 500);
         canvas.add(transformed);
         transformed.setCenter(canvas.getCenter());
+
+
 
         scan.close();
     }
