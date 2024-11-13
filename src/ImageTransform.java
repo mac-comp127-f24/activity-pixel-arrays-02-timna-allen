@@ -57,7 +57,7 @@ public class ImageTransform {
     }
 
     public static void main(String[] args) {
-        Image srcImage = new Image("mscs-shield.png");
+        Image srcImage = new Image("images (1).jpeg");
     
         Scanner scan = new Scanner(System.in);
         System.out.println("How would you like to transform your image?");
