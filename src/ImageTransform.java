@@ -8,12 +8,30 @@ public class ImageTransform {
     public static Image lighten(Image srcImage) {
         float[] pixels = srcImage.toFloatArray(Image.PixelFormat.valueOf("RGB"));
         for (int i=0; i< pixels.length; i++){
-            pixels[i] *= 1.5;
+            pixels[i] *= 1.75;
         }
 
         Image transImg = new Image(srcImage.getImageWidth(), srcImage.getImageHeight(), pixels, Image.PixelFormat.valueOf("RGB"));
         return transImg;
     }
+
+    public static Image makeGray(Image srcImage){
+        float[] pixels = srcImage.toFloatArray(Image.PixelFormat.valueOf("GRAYSCALE"));
+        Image transImg = new Image(srcImage.getImageWidth(), srcImage.getImageHeight(), pixels, Image.PixelFormat.valueOf("GRAYSCALE"));
+        return transImg;
+    }
+
+    public static Image makeLightGray(Image srcImage) {
+        float[] pixels = srcImage.toFloatArray(Image.PixelFormat.valueOf("GRAYSCALE"));
+        for (int i=0; i< pixels.length; i++){
+            pixels[i] *= 2.5;
+        }
+
+        Image transImg = new Image(srcImage.getImageWidth(), srcImage.getImageHeight(), pixels, Image.PixelFormat.valueOf("GRAYSCALE"));
+        return transImg;
+    }
+
+    
 
 
     public static Image greenShift(Image srcImage) {
@@ -46,6 +64,8 @@ public class ImageTransform {
         System.out.println("1. Lighten");
         System.out.println("2. Green Shift");
         System.out.println("3. Invert");
+        System.out.println("4. Convert to grayscale");
+        System.out.println("5. Convert to grayscale and lighten too much");
 
         System.out.print("> ");
         int choice = scan.nextInt();
@@ -55,6 +75,8 @@ public class ImageTransform {
             case 1 -> lighten(srcImage);
             case 2 -> greenShift(srcImage);
             case 3 -> invert(srcImage);
+            case 4 -> makeGray(srcImage);
+            case 5 -> makeLightGray(srcImage);
         };
 
         CanvasWindow canvas = new CanvasWindow("img", 500, 500);
